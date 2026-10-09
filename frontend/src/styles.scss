@@ -1,0 +1,85 @@
+@use './styles/variables' as v;
+
+/* ============================================================
+   Base global de TaskAI
+   El fondo oscuro se define aquí una sola vez; ningún componente
+   debe volver a pintarlo (por eso ya no hace falta !important).
+   ============================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+app-root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+
+body {
+  background-color: v.$bg-base;
+  color: v.$text-primary;
+  font-family: v.$font-stack;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+app-root {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  line-height: 1.25;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: v.$blue-light;
+  text-decoration: none;
+  transition: v.$transition;
+
+  &:hover {
+    color: v.$blue-pale;
+  }
+}
+
+::selection {
+  background: rgba(59, 130, 246, 0.35);
+  color: #ffffff;
+}
+
+/* --- Scrollbar acorde al tema oscuro --- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.4) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.35);
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+
+  &:hover {
+    background-color: rgba(148, 163, 184, 0.55);
+  }
+}

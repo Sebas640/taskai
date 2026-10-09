@@ -1,0 +1,58 @@
+@use '../../../../styles/variables' as v;
+
+.toast {
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: min(420px, calc(100vw - 50px));
+  padding: 14px 20px;
+  border-radius: v.$r-md;
+  background: linear-gradient(135deg, v.$green, v.$green-dark);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-weight: 500;
+  box-shadow: v.$shadow-elevated;
+  animation: toast-slide-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  &.error {
+    background: linear-gradient(135deg, v.$danger, v.$danger-dark);
+  }
+
+  .toast-text {
+    flex: 1;
+  }
+
+  .close-btn {
+    flex-shrink: 0;
+    padding: 0;
+    margin-left: 4px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
+/* A nivel raíz: un @keyframes anidado dentro de un selector no es válido. */
+@keyframes toast-slide-in {
+  from {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

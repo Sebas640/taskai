@@ -1,0 +1,28 @@
+# --- Secretos: NUNCA al repositorio (usa .env.example como plantilla) ---
+.env
+*.env
+!.env.example
+
+# --- Python ---
+.venv/
+__pycache__/
+*.pyc
+
+# --- Node / Angular ---
+node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/out-tsc/
+frontend/coverage/
+
+# --- Editores y sistema ---
+.idea/
+.vscode/*
+!frontend/.vscode/extensions.json
+.DS_Store
+Thumbs.db
+
+# --- Archivos locales del proyecto ---
+PROYECTO_COMPLETO.txt
+*.log
+.claude/

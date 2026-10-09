@@ -1,0 +1,647 @@
+.landing-container {
+  min-height: 100vh;
+  background-color: #0b0f19;
+  color: #f8fafc;
+  font-family: system-ui, -apple-system, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 2rem;
+
+  .bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 32px 32px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .bg-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: 1;
+
+    &.blob-1 {
+      top: -100px;
+      left: 10%;
+      background: #3b82f6;
+    }
+
+    &.blob-2 {
+      top: 200px;
+      right: 10%;
+      background: #10b981;
+    }
+  }
+
+  .navbar {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+
+      span {
+        background: linear-gradient(135deg, #60a5fa, #3b82f6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 1rem;
+
+      a {
+        text-decoration: none;
+        padding: 0.6rem 1.4rem;
+        border-radius: 10px;
+        font-weight: 600;
+        transition: all 0.25s ease;
+      }
+
+      .btn-login {
+        color: #93c5fd;
+        border: 1px solid rgba(147, 197, 253, 0.3);
+        background: rgba(15, 23, 42, 0.6);
+
+        &:hover {
+          background: rgba(59, 130, 246, 0.2);
+          border-color: #60a5fa;
+        }
+      }
+
+      .btn-register {
+        background: #2563eb;
+        color: #ffffff;
+        box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+
+        &:hover {
+          background: #1d4ed8;
+          transform: translateY(-2px);
+        }
+      }
+    }
+  }
+
+  .hero {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 1000px;
+    margin: 2rem auto 4rem;
+    padding: 5rem 2rem;
+    border-radius: 24px;
+    overflow: hidden;
+
+    background:
+      linear-gradient(180deg, rgba(11, 15, 25, 0.7) 0%, rgba(11, 15, 25, 0.88) 100%),
+      url('https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(59, 130, 246, 0.15);
+
+    .badge-pill {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 30px;
+      background: rgba(59, 130, 246, 0.25);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      color: #93c5fd;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(4px);
+    }
+
+    .hero-title {
+      // 32 px en móvil pequeño → 51 px en escritorio (igual que antes)
+      font-size: clamp(2rem, 1.2rem + 4vw, 3.2rem);
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+      color: #ffffff;
+
+      .text-bg-image {
+        background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 12px rgba(129, 140, 248, 0.6));
+      }
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 0.9rem + 0.5vw, 1.2rem);
+      color: #cbd5e1;
+      max-width: 650px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1.25rem;
+
+      a {
+        text-decoration: none;
+        padding: 0.9rem 2.2rem;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 1.05rem;
+        transition: all 0.25s ease;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #10b981, #059669);
+        color: white;
+        box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 24px rgba(16, 185, 129, 0.6);
+        }
+      }
+
+      .btn-secondary {
+        background: rgba(15, 23, 42, 0.6);
+        color: #e2e8f0;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(8px);
+
+        &:hover {
+          background: rgba(30, 41, 59, 0.8);
+          border-color: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+  }
+
+  .carousel-section {
+    position: relative;
+    z-index: 10;
+    max-width: 900px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+
+    .carousel-container {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #1e293b;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      height: 380px;
+
+      .slide-card {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.8s ease-in-out;
+        pointer-events: none;
+
+        &.active {
+          opacity: 1;
+          pointer-events: auto;
+        }
+
+        .slide-image-wrapper {
+          width: 100%;
+          height: 100%;
+          position: relative;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .image-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(11, 15, 25, 0.95) 15%, transparent 70%);
+          }
+        }
+
+        .slide-caption {
+          position: absolute;
+          bottom: 2rem;
+          left: 2rem;
+          right: 2rem;
+          z-index: 2;
+
+          h3 {
+            font-size: 1.6rem;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+          }
+
+          p {
+            color: #cbd5e1;
+            font-size: 1rem;
+          }
+        }
+      }
+
+      .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(15, 23, 42, 0.6);
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+
+        &:hover {
+          background: rgba(37, 99, 235, 0.8);
+        }
+
+        &.prev { left: 1rem; }
+        &.next { right: 1rem; }
+      }
+
+      .carousel-dots {
+        position: absolute;
+        bottom: 1rem;
+        right: 2rem;
+        z-index: 5;
+        display: flex;
+        gap: 8px;
+
+        .dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.4);
+          cursor: pointer;
+          transition: all 0.3s;
+
+          &.active {
+            background: #3b82f6;
+            width: 24px;
+            border-radius: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  /* --- SECCIÓN DE CARACTERÍSTICAS / TARJETAS FLIP 3D --- */
+  .features-section {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 6rem auto 4rem;
+    padding: 0 1.5rem;
+
+    .section-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(1.6rem, 1rem + 3vw, 2.2rem);
+      margin: 0;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    /* Botón del sonido de volteo */
+    .sound-toggle {
+      padding: 6px 16px;
+      border-radius: 30px;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(96, 165, 250, 0.4);
+      color: #93c5fd;
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: all 0.25s ease;
+
+      &:hover {
+        background: rgba(59, 130, 246, 0.3);
+        border-color: #60a5fa;
+        color: #ffffff;
+      }
+
+      &:focus-visible {
+        outline: 2px solid #60a5fa;
+        outline-offset: 3px;
+      }
+
+      /* Aún bloqueado por el navegador: pulso para invitar al clic */
+      &.invite {
+        animation: sound-invite 2s ease-in-out infinite;
+      }
+
+      &.muted {
+        background: rgba(15, 23, 42, 0.6);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: #94a3b8;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        &.invite {
+          animation: none;
+        }
+      }
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+
+      @media (max-width: 992px) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @media (max-width: 640px) {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .feature-card {
+      background: transparent;
+      perspective: 1000px; /* Profundidad 3D para el giro */
+      height: 280px;       /* Altura fija uniforme */
+      cursor: pointer;
+
+      &:hover .card-inner {
+        transform: rotateY(180deg);
+      }
+
+      .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: left;
+        transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        transform-style: preserve-3d;
+      }
+
+      .card-front, .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        border-radius: 16px;
+        padding: 1.75rem 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+      }
+
+      /* Frente de la tarjeta */
+      .card-front {
+        background: rgba(15, 23, 42, 0.7);
+        justify-content: flex-start;
+
+        .icon-box {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }
+
+        h3 {
+          font-size: 1.2rem;
+          font-weight: 700;
+          color: #f8fafc;
+          margin-bottom: 0.75rem;
+        }
+
+        p {
+          color: #94a3b8;
+          font-size: 0.9rem;
+          line-height: 1.5;
+          margin: 0;
+        }
+      }
+
+      /* Reverso de la tarjeta */
+      .card-back {
+        background: rgba(30, 41, 59, 0.95);
+        border-color: rgba(96, 165, 250, 0.3);
+        transform: rotateY(180deg);
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+
+        .back-img {
+          width: 100%;
+          height: 100px;
+          object-fit: cover;
+          border-radius: 10px;
+          margin-bottom: 0.8rem;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h4 {
+          font-size: 1.05rem;
+          font-weight: 700;
+          color: #60a5fa;
+          margin-bottom: 0.4rem;
+        }
+
+        p {
+          font-size: 0.85rem;
+          color: #cbd5e1;
+          line-height: 1.4;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  .landing-footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-top: 4rem;
+  }
+
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+
+  // --- Tablet y móvil ---
+  @media (max-width: 640px) {
+    // Halos más pequeños: los de 400 px son más anchos que la pantalla
+    .bg-glow {
+      width: 260px;
+      height: 260px;
+    }
+
+    .navbar {
+      padding: 1rem;
+
+      .logo {
+        font-size: 1.2rem;
+        white-space: nowrap;
+      }
+
+      .nav-actions {
+        gap: 0.5rem;
+
+        a {
+          padding: 0.5rem 0.9rem;
+          font-size: 0.875rem;
+          white-space: nowrap;
+        }
+      }
+    }
+
+    .hero {
+      margin: 1rem 1rem 2.5rem;
+      padding: 3rem 1.25rem;
+      border-radius: 18px;
+
+      .hero-title {
+        margin-bottom: 1rem;
+      }
+
+      .hero-subtitle {
+        margin-bottom: 2rem;
+      }
+
+      .cta-buttons {
+        flex-wrap: wrap;
+        gap: 0.75rem;
+
+        a {
+          padding: 0.8rem 1.6rem;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .carousel-section {
+      margin: 2.5rem auto;
+      padding: 0 1rem;
+
+      .carousel-container {
+        height: 320px;
+
+        .slide-card .slide-caption {
+          left: 1.25rem;
+          right: 1.25rem;
+          bottom: 2.75rem; // deja sitio a los puntos indicadores
+
+          h3 {
+            font-size: 1.2rem;
+          }
+
+          p {
+            font-size: 0.9rem;
+          }
+        }
+
+        // Las flechas suben a las esquinas superiores para no tapar el texto
+        .nav-btn {
+          top: 1rem;
+          transform: none;
+          width: 38px;
+          height: 38px;
+        }
+
+        .carousel-dots {
+          right: auto;
+          left: 50%;
+          bottom: 1rem;
+          transform: translateX(-50%);
+        }
+      }
+    }
+
+    .features-section {
+      margin: 4rem auto 2rem;
+      padding: 0 1rem;
+
+      .section-header {
+        margin-bottom: 2rem;
+      }
+
+      .features-grid {
+        gap: 1.25rem;
+      }
+    }
+
+    .landing-footer {
+      margin-top: 2.5rem;
+      padding: 0 1rem;
+    }
+  }
+
+  // --- Móvil pequeño: el menú no cabe en una fila y se apila ---
+  @media (max-width: 480px) {
+    .navbar {
+      flex-direction: column;
+      gap: 0.85rem;
+
+      .nav-actions {
+        width: 100%;
+
+        a {
+          flex: 1;
+          text-align: center;
+        }
+      }
+    }
+
+    .hero .cta-buttons {
+      flex-direction: column;
+
+      a {
+        text-align: center;
+      }
+    }
+  }
+}
+
+/* A nivel raíz: pulso del botón de sonido mientras invita a activarlo */
+@keyframes sound-invite {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.5); }
+  50%      { box-shadow: 0 0 0 8px rgba(96, 165, 250, 0); }
+}

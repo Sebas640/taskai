@@ -1,0 +1,47 @@
+<!-- Cuerpo HTML del correo de recordatorio. enviar_recordatorios.py sustituye los marcadores ${...}
+     (string.Template) con valores YA escapados. Tablas y estilos en línea: es lo que soportan los
+     clientes de correo. Si añades un "$" literal, escríbelo como "$$". -->
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f1f5f9;padding:24px 12px;font-family:Segoe UI,Roboto,Helvetica,Arial,sans-serif;">
+  <tr>
+    <td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:14px;overflow:hidden;box-shadow:0 4px 18px rgba(15,23,42,0.08);">
+        <tr>
+          <td style="background:#0b0f19;padding:20px 28px;">
+            <span style="font-size:20px;font-weight:800;color:#f8fafc;">🚀 <span style="color:#60a5fa;">TaskAI</span></span>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:28px 28px 8px;color:#0f172a;">
+            <p style="margin:0 0 6px;font-size:16px;">Hola ${nombre},</p>
+            <p style="margin:0 0 20px;font-size:16px;color:#334155;">${intro}</p>
+
+            <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e8f0;border-left:4px solid #3b82f6;border-radius:10px;">
+              <tr>
+                <td style="padding:16px 18px;">
+                  <p style="margin:0 0 10px;font-size:18px;font-weight:700;color:#0f172a;">${titulo}</p>
+                  <p style="margin:0 0 6px;font-size:14px;color:#475569;">📅 ${fecha}</p>
+                  <p style="margin:0;font-size:14px;color:#475569;">
+                    🏷️ ${categoria}
+                    &nbsp;·&nbsp;
+                    <span style="font-weight:700;color:${color_prioridad};">Prioridad ${prioridad}</span>
+                  </p>
+                </td>
+              </tr>
+            </table>
+
+            ${bloque_consejo}
+
+            <p style="margin:26px 0 8px;">
+              <a href="${url_app}" style="display:inline-block;padding:12px 22px;background:#2563eb;color:#ffffff;text-decoration:none;font-weight:700;border-radius:8px;">Ver mis tareas</a>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:16px 28px 24px;font-size:12px;color:#94a3b8;border-top:1px solid #f1f5f9;">
+            Recibes este correo porque tienes una tarea con fecha en TaskAI. Al marcarla como completada dejarás de recibir avisos sobre ella.
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

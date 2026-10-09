@@ -1,0 +1,67 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/mixins' as m;
+
+.task-form-container {
+  @include m.glass-surface;
+  padding: 1.5rem;
+
+  h2 {
+    margin: 0 0 1.1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: v.$text-primary;
+  }
+
+  .input-group {
+    display: flex;
+    gap: 0.75rem;
+
+    @media (max-width: 640px) {
+      flex-direction: column;
+    }
+
+    input {
+      @include m.field-dark;
+      flex: 1;
+    }
+
+    button {
+      @include m.btn-primary;
+      flex-shrink: 0;
+      padding: 0.8rem 1.5rem;
+      white-space: nowrap;
+    }
+  }
+
+  .error-msg {
+    margin-top: 0.85rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: v.$r-sm;
+    border: 1px solid rgba(239, 68, 68, 0.35);
+    background: rgba(239, 68, 68, 0.12);
+    color: #fca5a5;
+    font-size: 0.875rem;
+  }
+
+  .spinner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: '';
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      border-top-color: #ffffff;
+      border-radius: 50%;
+      animation: form-spin 0.7s linear infinite;
+    }
+  }
+}
+
+@keyframes form-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

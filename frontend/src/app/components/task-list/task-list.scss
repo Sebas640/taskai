@@ -1,0 +1,264 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/mixins' as m;
+
+:host {
+  display: block;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  padding: 2.5rem 1rem 4rem;
+  color: v.$text-primary;
+}
+
+/* --- Fondo decorativo compartido con la landing --- */
+.bg-grid {
+  @include m.bg-grid;
+}
+
+.bg-glow {
+  &.blob-1 {
+    @include m.bg-glow(v.$blue);
+    top: -140px;
+    left: 5%;
+  }
+
+  &.blob-2 {
+    @include m.bg-glow(v.$green);
+    top: 300px;
+    right: 5%;
+    opacity: 0.25;
+  }
+}
+
+.main-container {
+  position: relative;
+  z-index: 10;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* --- Cabecera --- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: v.$text-primary;
+    margin-bottom: 0.4rem;
+
+    span {
+      @include m.text-gradient;
+    }
+  }
+
+  p {
+    color: v.$text-muted;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    h1 {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.btn-logout {
+  @include m.btn-danger;
+  flex-shrink: 0;
+  padding: 0.6rem 1.2rem;
+}
+
+/* --- Listado de tareas --- */
+.task-list-container {
+  margin-top: 2.5rem;
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: v.$text-primary;
+    margin-bottom: 1.25rem;
+  }
+
+  .state-msg {
+    @include m.glass-surface;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+    color: v.$text-muted;
+
+    &.error {
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.35);
+      background: rgba(239, 68, 68, 0.1);
+    }
+  }
+
+  .tasks-grid {
+    display: grid;
+    // min(): en pantallas de menos de 300 px útiles, la tarjeta ocupa el 100 % sin desbordar
+    grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+    gap: 1.5rem;
+  }
+
+  .task-card {
+    @include m.glass-surface;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.25rem;
+    border-left: 4px solid v.$blue;
+    transition: transform 0.2s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: v.$shadow-elevated;
+    }
+
+    &.completed {
+      opacity: 0.6;
+      border-left-color: v.$green;
+
+      .task-title {
+        text-decoration: line-through;
+      }
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .category-badge,
+    .priority-badge {
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .category-badge {
+      background: rgba(59, 130, 246, 0.18);
+      border: 1px solid rgba(96, 165, 250, 0.35);
+      color: v.$blue-pale;
+    }
+
+    .priority-badge {
+      border: 1px solid transparent;
+
+      &.alta {
+        background: rgba(239, 68, 68, 0.18);
+        border-color: rgba(239, 68, 68, 0.4);
+        color: #fca5a5;
+      }
+
+      &.media {
+        background: rgba(217, 119, 6, 0.18);
+        border-color: rgba(251, 191, 36, 0.4);
+        color: #fcd34d;
+      }
+
+      &.baja {
+        background: rgba(16, 185, 129, 0.18);
+        border-color: rgba(16, 185, 129, 0.4);
+        color: #6ee7b7;
+      }
+    }
+
+    .task-title {
+      margin: 0 0 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: v.$text-primary;
+    }
+
+    /* El consejo de Gemini es el valor diferencial: se destaca. */
+    .ai-analysis {
+      padding: 0.65rem 0.8rem;
+      margin-bottom: 1rem;
+      border-radius: v.$r-sm;
+      border-left: 3px solid v.$blue-light;
+      background: rgba(59, 130, 246, 0.1);
+      color: v.$text-secondary;
+      font-size: 0.85rem;
+      line-height: 1.5;
+
+      strong {
+        color: v.$blue-pale;
+      }
+    }
+
+    .card-footer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: auto;
+      padding-top: 0.85rem;
+      border-top: 1px solid v.$border-subtle;
+
+      .due-date {
+        font-size: 0.8rem;
+        color: v.$text-muted;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .btn-status {
+        @include m.btn-base;
+        padding: 0.35rem 0.8rem;
+        font-size: 0.78rem;
+        background: rgba(16, 185, 129, 0.2);
+        border: 1px solid rgba(16, 185, 129, 0.45);
+        color: #6ee7b7;
+
+        &:hover {
+          background: v.$green;
+          color: #ffffff;
+        }
+
+        &.btn-completed {
+          background: rgba(148, 163, 184, 0.15);
+          border-color: v.$border-strong;
+          color: v.$text-muted;
+
+          &:hover {
+            background: rgba(148, 163, 184, 0.3);
+            color: v.$text-primary;
+          }
+        }
+      }
+
+      .btn-delete {
+        @include m.btn-base;
+        padding: 0.3rem 0.45rem;
+        background: transparent;
+        font-size: 1rem;
+        line-height: 1;
+        opacity: 0.7;
+
+        &:hover {
+          opacity: 1;
+          background: rgba(239, 68, 68, 0.15);
+        }
+      }
+    }
+  }
+}

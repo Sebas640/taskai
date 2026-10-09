@@ -1,0 +1,64 @@
+<!-- Fondo decorativo, mismo lenguaje visual que la landing -->
+<div class="bg-grid"></div>
+<div class="bg-glow blob-1"></div>
+<div class="bg-glow blob-2"></div>
+
+<div class="main-container">
+
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-text">
+      <h1>🚀 <span>TaskAI</span> · Gestor de Tareas Inteligente</h1>
+      <p>Organiza tu día utilizando procesamiento en lenguaje natural impulsado por Gemini.</p>
+    </div>
+    <button type="button" (click)="onLogout()" class="btn-logout">Cerrar Sesión</button>
+  </header>
+
+  <!-- Formulario -->
+  <main>
+    <app-task-form (taskCreated)="addTaskToList($event)"></app-task-form>
+  </main>
+
+  <!-- Contenedor del listado -->
+  <div class="task-list-container">
+    <h2>Tus Tareas</h2>
+
+    <div *ngIf="isLoading" class="state-msg">Cargando tareas desde la base de datos...</div>
+    <div *ngIf="errorMessage" class="state-msg error">{{ errorMessage }}</div>
+    <div *ngIf="!isLoading && !errorMessage && tasks.length === 0" class="state-msg">
+      No hay tareas registradas aún. ¡Crea una arriba!
+    </div>
+
+    <div class="tasks-grid" *ngIf="!isLoading && tasks.length > 0">
+      <div *ngFor="let task of tasks" class="task-card" [class.completed]="task.completed">
+
+        <div class="card-header">
+          <span class="category-badge">{{ task.category }}</span>
+          <span class="priority-badge" [class]="task.priority.toLowerCase()">{{ task.priority }}</span>
+        </div>
+
+        <h3 class="task-title">{{ task.title }}</h3>
+
+        <p *ngIf="task.ai_analysis" class="ai-analysis">
+          🤖 <strong>Análisis IA:</strong> {{ task.ai_analysis }}
+        </p>
+
+        <div class="card-footer">
+          <span class="due-date" *ngIf="task.due_date">📅 {{ task.due_date }}</span>
+          <span class="due-date" *ngIf="!task.due_date">📅 Sin fecha fijada</span>
+
+          <div class="actions">
+            <button type="button" (click)="toggleStatus(task)" class="btn-status" [class.btn-completed]="task.completed">
+              {{ task.completed ? 'Desmarcar' : 'Completar' }}
+            </button>
+            <button type="button" (click)="deleteTask(task.id)" class="btn-delete" title="Eliminar tarea" aria-label="Eliminar tarea">
+              🗑️
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

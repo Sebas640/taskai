@@ -1,0 +1,52 @@
+// ============================================================
+//  TaskAI — Tokens del sistema de diseño
+//  Los valores provienen de la landing, que es la referencia visual.
+// ============================================================
+
+// --- FONDOS ---
+$bg-base:       #0b0f19;                 // Fondo global de la aplicación
+$bg-surface:    rgba(15, 23, 42, 0.7);   // Tarjetas y paneles (glass)
+$bg-elevated:   rgba(30, 41, 59, 0.95);  // Superficies por encima de una tarjeta
+$bg-input:      rgba(15, 23, 42, 0.6);   // Campos de formulario
+
+// --- BORDES ---
+$border-subtle: rgba(255, 255, 255, 0.08);
+$border-medium: rgba(255, 255, 255, 0.12);
+$border-strong: rgba(255, 255, 255, 0.2);
+$border-accent: rgba(96, 165, 250, 0.3);
+
+// --- TEXTO ---
+$text-primary:   #f8fafc;
+$text-secondary: #cbd5e1;
+$text-muted:     #94a3b8;
+$text-dim:       #64748b;
+
+// --- ACENTOS ---
+$blue:       #3b82f6;
+$blue-light: #60a5fa;
+$blue-pale:  #93c5fd;
+$blue-dark:  #2563eb;
+$green:      #10b981;
+$green-dark: #059669;
+
+// --- ESTADO ---
+$danger:      #ef4444;
+$danger-dark: #dc2626;
+$warning:     #d97706;
+
+// --- RADIOS ---
+$r-sm:   8px;
+$r-md:   12px;
+$r-lg:   16px;
+$r-xl:   24px;
+$r-pill: 30px;
+
+// --- SOMBRAS ---
+$shadow-card:       0 10px 25px rgba(0, 0, 0, 0.3);
+$shadow-elevated:   0 20px 40px rgba(0, 0, 0, 0.6);
+$shadow-glow-blue:  0 4px 20px rgba(37, 99, 235, 0.4);
+$shadow-glow-green: 0 4px 20px rgba(16, 185, 129, 0.4);
+
+// --- OTROS ---
+$transition: all 0.25s ease;
+$font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

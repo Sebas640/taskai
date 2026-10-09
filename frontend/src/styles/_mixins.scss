@@ -1,0 +1,145 @@
+@use 'variables' as v;
+
+// ============================================================
+//  TaskAI — Mixins reutilizables
+// ============================================================
+
+// Superficie translúcida con desenfoque: la base de todas las tarjetas.
+@mixin glass-surface($bg: v.$bg-surface, $border: v.$border-subtle) {
+  background: $bg;
+  border: 1px solid $border;
+  border-radius: v.$r-lg;
+  backdrop-filter: blur(8px);
+  box-shadow: v.$shadow-card;
+}
+
+// Base común de todos los botones.
+@mixin btn-base {
+  border: none;
+  border-radius: v.$r-sm;
+  font-family: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: v.$transition;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+    transform: none;
+  }
+}
+
+// Acción principal: gradiente verde (mismo CTA "Empieza Gratis" de la landing).
+@mixin btn-primary {
+  @include btn-base;
+  background: linear-gradient(135deg, v.$green, v.$green-dark);
+  color: #ffffff;
+  box-shadow: v.$shadow-glow-green;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(16, 185, 129, 0.6);
+  }
+}
+
+// Acción secundaria fuerte: azul sólido.
+@mixin btn-accent {
+  @include btn-base;
+  background: v.$blue-dark;
+  color: #ffffff;
+  box-shadow: v.$shadow-glow-blue;
+
+  &:hover:not(:disabled) {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+  }
+}
+
+// Acción terciaria: contorno translúcido sobre el fondo oscuro.
+@mixin btn-ghost {
+  @include btn-base;
+  background: v.$bg-input;
+  color: v.$text-secondary;
+  border: 1px solid v.$border-strong;
+  backdrop-filter: blur(8px);
+
+  &:hover:not(:disabled) {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: v.$text-primary;
+  }
+}
+
+// Acción destructiva.
+@mixin btn-danger {
+  @include btn-base;
+  background: rgba(239, 68, 68, 0.15);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+
+  &:hover:not(:disabled) {
+    background: v.$danger;
+    border-color: v.$danger;
+    color: #ffffff;
+  }
+}
+
+// Campo de formulario sobre fondo oscuro.
+@mixin field-dark {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background: v.$bg-input;
+  border: 1px solid v.$border-medium;
+  border-radius: v.$r-sm;
+  color: v.$text-primary;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: v.$transition;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: v.$text-dim;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: v.$blue-light;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Rejilla de puntos del fondo (decorativa, no interactiva).
+@mixin bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// Halo de color difuminado del fondo.
+@mixin bg-glow($color, $size: 400px) {
+  position: absolute;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: $color;
+  filter: blur(120px);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: 1;
+}
+
+// Texto con el gradiente azul de la marca.
+@mixin text-gradient {
+  background: linear-gradient(135deg, v.$blue-light, v.$blue);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

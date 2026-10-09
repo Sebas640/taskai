@@ -1,0 +1,204 @@
+<div class="landing-container">
+
+  <!-- Efectos de Fondo -->
+  <div class="bg-glow blob-1"></div>
+  <div class="bg-glow blob-2"></div>
+  <div class="bg-grid"></div>
+
+  <!-- Navbar -->
+  <nav class="navbar animate-on-scroll">
+    <div class="logo">🚀 <span>TaskAI</span> Core</div>
+    <div class="nav-actions">
+      <a routerLink="/login" class="btn-login">Iniciar Sesión</a>
+      <a routerLink="/register" class="btn-register">Registrarse</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero animate-on-scroll">
+    <div class="badge-pill">✨ Impulsado por Gemini AI</div>
+
+    <h1 class="hero-title">
+      Organiza tus tareas con el <span class="text-bg-image">poder de la IA</span>
+    </h1>
+
+    <p class="hero-subtitle">
+      Convierte tus notas desordenadas en tareas estructuradas automáticamente mediante procesamiento en lenguaje natural.
+    </p>
+
+    <div class="cta-buttons">
+      <a routerLink="/register" class="btn-primary">Empieza Gratis</a>
+      <a routerLink="/login" class="btn-secondary">Ya tengo cuenta</a>
+    </div>
+  </header>
+
+  <!-- Carrusel Interactivo y Automático -->
+  <section class="carousel-section animate-on-scroll">
+    <div class="carousel-container" (mouseenter)="stopAutoSlide()" (mouseleave)="startAutoSlide()">
+
+      <div
+        *ngFor="let slide of slides; let i = index"
+        class="slide-card"
+        [class.active]="i === currentSlide"
+      >
+        <div class="slide-image-wrapper">
+          <img [src]="slide.image" [alt]="slide.title" />
+          <div class="image-overlay"></div>
+        </div>
+        <div class="slide-caption">
+          <h3>{{ slide.title }}</h3>
+          <p>{{ slide.description }}</p>
+        </div>
+      </div>
+
+      <!-- Controles Manuales -->
+      <button class="nav-btn prev" (click)="prevSlide()">❮</button>
+      <button class="nav-btn next" (click)="nextSlide()">❯</button>
+
+      <!-- Indicadores -->
+      <div class="carousel-dots">
+        <span
+          *ngFor="let slide of slides; let i = index"
+          class="dot"
+          [class.active]="i === currentSlide"
+          (click)="goToSlide(i)"
+        ></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección con más información del Proyecto -->
+  <section class="features-section">
+    <div class="section-header animate-on-scroll">
+      <h2 class="section-title">¿Por qué elegir TaskAI?</h2>
+
+      <!-- Control del sonido de volteo. data-sound-toggle: ver FlipSoundService.onGesture -->
+      <button
+        type="button"
+        class="sound-toggle"
+        data-sound-toggle
+        [class.invite]="flipSound.state() === 'invite'"
+        [class.muted]="flipSound.state() === 'muted'"
+        [attr.aria-pressed]="flipSound.state() === 'on'"
+        [attr.aria-label]="flipSound.state() === 'on' ? 'Silenciar el sonido de las tarjetas' : 'Activar el sonido de las tarjetas'"
+        (click)="flipSound.toggle()"
+      >
+        @switch (flipSound.state()) {
+          @case ('invite') { 🔇 Activar sonido }
+          @case ('on') { 🔊 Sonido activado }
+          @case ('muted') { 🔇 Sonido silenciado }
+        }
+      </button>
+    </div>
+
+    <div class="features-grid">
+      <!-- Tarjeta 1: Comprensión Natural -->
+    <div class="feature-card animate-on-scroll" (mouseenter)="flipSound.play('open')" (mouseleave)="flipSound.play('close')">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="icon-box">🧠</div>
+          <h3>Comprensión Natural</h3>
+          <p>Escribe tu pendiente como hablas normalmente y la IA extraerá el título, categoría y fecha límite por ti.</p>
+        </div>
+        <div class="card-back">
+          <!-- Teclado del móvil escribiendo un mensaje (Unsplash photo-1720069004713-f72d26684a87) -->
+          <img src="images/features/nlp.jpg" alt="Teclado de un móvil escribiendo un mensaje de texto" class="back-img">
+          <h4>Procesamiento NLP</h4>
+          <p>Convierte textos informales como "Entregar informe el viernes a las 3pm" en eventos estructurados al instante.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 2: Clasificación Automática -->
+    <div class="feature-card animate-on-scroll" (mouseenter)="flipSound.play('open')" (mouseleave)="flipSound.play('close')">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="icon-box">⚡</div>
+          <h3>Clasificación Automática</h3>
+          <p>Tus tareas se priorizan en niveles Alto, Medio o Bajo según la urgencia de tu contexto.</p>
+        </div>
+        <div class="card-back">
+          <!-- Calendario con fechas límite marcadas (Unsplash photo-1633526543814-9718c8922b7a) -->
+          <img src="images/features/priority.jpg" alt="Calendario con chinchetas rojas marcando fechas límite" class="back-img">
+          <h4>Priorización Dinámica</h4>
+          <p>Evaluación de contexto en tiempo real para organizar tus entregas sin requerir orden manual.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 3: Seguro y Centralizado -->
+    <div class="feature-card animate-on-scroll" (mouseenter)="flipSound.play('open')" (mouseleave)="flipSound.play('close')">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="icon-box">🔒</div>
+          <h3>Seguro y Centralizado</h3>
+          <p>Backend potenciado por FastAPI, almacenamiento confiable en PostgreSQL y JWT para proteger tus datos.</p>
+        </div>
+        <div class="card-back">
+          <!-- Candado sobre teclado (Unsplash photo-1614064641938-3bbee52942c7) -->
+          <img src="images/features/security.jpg" alt="Candado cerrado sobre un teclado de computadora" class="back-img">
+          <h4>Seguridad en Capas</h4>
+          <p>Tokens JWT encriptados y persistencia en bases de datos relacionales robustas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 4: Potenciado por Gemini AI -->
+    <div class="feature-card animate-on-scroll" (mouseenter)="flipSound.play('open')" (mouseleave)="flipSound.play('close')">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="icon-box">✨</div>
+          <h3>Potenciado por Gemini AI</h3>
+          <p>Integración directa con los modelos de IA para transformar notas desordenadas en tareas estructuradas.</p>
+        </div>
+        <div class="card-back">
+          <!-- Cerebro de circuitos / IA (Unsplash photo-1677442135703-1787eea5ce01) -->
+          <img src="images/features/ai.jpg" alt="Cerebro formado por circuitos que representa la inteligencia artificial" class="back-img">
+          <h4>Integración LLM</h4>
+          <p>Aprovecha la capacidad analítica de Gemini para razonar y desglosar tareas en segundos.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 5: Categorización Inteligente -->
+    <div class="feature-card animate-on-scroll" (mouseenter)="flipSound.play('open')" (mouseleave)="flipSound.play('close')">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="icon-box">🏷️</div>
+          <h3>Categorización Inteligente</h3>
+          <p>Organiza tus actividades automáticamente por contexto para mantener el control de tus proyectos.</p>
+        </div>
+        <div class="card-back">
+          <!-- Notas adhesivas agrupadas por color y tema (Unsplash photo-1676276383599-478e31770aac) -->
+          <img src="images/features/categories.jpg" alt="Notas adhesivas de colores agrupadas por temas" class="back-img">
+          <h4>Etiquetado por Áreas</h4>
+          <p>Agrupa actividades según su ámbito (Estudio, Trabajo, Personal) para evitar la saturación mental.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 6: Interfaz Fluida y Moderna -->
+    <div class="feature-card animate-on-scroll" (mouseenter)="flipSound.play('open')" (mouseleave)="flipSound.play('close')">
+      <div class="card-inner">
+        <div class="card-front">
+          <div class="icon-box">🚀</div>
+          <h3>Interfaz Fluida y Moderna</h3>
+          <p>Desarrollado en Angular con un diseño optimizado para respuesta en tiempo real y alta velocidad.</p>
+        </div>
+        <div class="card-back">
+          <!-- Portátil con código frontend (Unsplash photo-1555066931-4365d14bab8c) -->
+          <img src="images/features/spa.jpg" alt="Portátil mostrando código de una aplicación web" class="back-img">
+          <h4>Arquitectura SPA</h4>
+          <p>Navegación reactiva sin recargas de página, optimizada para rendimiento y máxima fluidez.</p>
+        </div>
+      </div>
+    </div>
+
+    </div>
+  </section>
+
+  <footer class="landing-footer">
+    <p>© 2026 TaskAI Core — Desarrollado con Angular & FastAPI</p>
+  </footer>
+
+</div>

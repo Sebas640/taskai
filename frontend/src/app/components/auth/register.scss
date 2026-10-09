@@ -1,0 +1,7 @@
+@use './auth-shared';
+@use '../../../styles/mixins' as m;
+
+// El registro usa el gradiente verde, igual que el CTA "Empieza Gratis" de la landing.
+.btn-submit {
+  @include m.btn-primary;
+}

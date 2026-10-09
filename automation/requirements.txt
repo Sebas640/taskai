@@ -1,0 +1,2 @@
+# Dependencias de enviar_recordatorios.py (lo único que instala GitHub Actions).
+psycopg2-binary==2.9.12

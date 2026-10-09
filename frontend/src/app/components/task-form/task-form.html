@@ -1,0 +1,19 @@
+<div class="task-form-container">
+  <h2>Añadir nueva tarea con IA</h2>
+  <form (ngSubmit)="onSubmit()" class="input-group">
+    <input
+      type="text"
+      [(ngModel)]="taskText"
+      name="taskText"
+      placeholder="Ej: Tengo examen de cálculo el próximo martes a las 8am..."
+      [disabled]="isLoading"
+      required
+    />
+    <button type="submit" [disabled]="isLoading || !taskText.trim()">
+      <span *ngIf="!isLoading">Procesar Tarea</span>
+      <span *ngIf="isLoading" class="spinner">Procesando con Gemini...</span>
+    </button>
+  </form>
+
+  <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+</div>

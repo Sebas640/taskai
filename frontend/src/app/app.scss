@@ -1,0 +1,6 @@
+/* El fondo y la tipografía viven en src/styles.scss.
+   Este host solo aporta la estructura del contenedor raíz. */
+:host {
+  display: block;
+  min-height: 100vh;
+}

@@ -1,0 +1,7 @@
+@use './auth-shared';
+@use '../../../styles/mixins' as m;
+
+// El acceso usa el azul de marca como acción principal.
+.btn-submit {
+  @include m.btn-accent;
+}

@@ -1,0 +1,173 @@
+@use '../../../styles/variables' as v;
+@use '../../../styles/mixins' as m;
+
+// ============================================================
+//  Estructura compartida por login y registro.
+//  Reutiliza el lenguaje visual de la landing: fondo oscuro con
+//  rejilla de puntos, halos de color y tarjeta glass centrada.
+// ============================================================
+
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.auth-page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  overflow: hidden;
+
+  .bg-grid {
+    @include m.bg-grid;
+  }
+
+  .bg-glow {
+    &.blob-1 {
+      @include m.bg-glow(v.$blue);
+      top: -120px;
+      left: -60px;
+    }
+
+    &.blob-2 {
+      @include m.bg-glow(v.$green);
+      bottom: -140px;
+      right: -60px;
+      opacity: 0.25;
+    }
+  }
+}
+
+.auth-card {
+  @include m.glass-surface;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 430px;
+  padding: 2rem;
+  border-radius: v.$r-xl;
+  box-shadow: v.$shadow-elevated;
+}
+
+/* --- Enlace de vuelta a la landing --- */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1.75rem;
+  padding: 6px 14px;
+  border-radius: v.$r-pill;
+  background: v.$bg-input;
+  border: 1px solid v.$border-strong;
+  color: v.$text-secondary;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: v.$transition;
+
+  .brand {
+    font-weight: 800;
+    @include m.text-gradient;
+  }
+
+  .sep {
+    color: v.$text-dim;
+  }
+
+  &:hover {
+    border-color: v.$blue-light;
+    color: v.$text-primary;
+    transform: translateY(-1px);
+  }
+}
+
+/* --- Encabezado --- */
+.auth-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: v.$text-primary;
+  margin-bottom: 0.5rem;
+}
+
+.auth-subtitle {
+  color: v.$text-muted;
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+}
+
+/* --- Formulario --- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: v.$text-secondary;
+    }
+
+    input {
+      @include m.field-dark;
+    }
+  }
+}
+
+.error-box {
+  padding: 0.7rem 0.9rem;
+  border-radius: v.$r-sm;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  font-size: 0.875rem;
+}
+
+.btn-submit {
+  width: 100%;
+  padding: 0.85rem 1.5rem;
+  font-size: 1rem;
+  margin-top: 0.25rem;
+}
+
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+
+  &::before {
+    content: '';
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: auth-spin 0.7s linear infinite;
+  }
+}
+
+/* --- Pie de la tarjeta --- */
+.auth-footer {
+  margin-top: 1.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid v.$border-subtle;
+  text-align: center;
+  font-size: 0.9rem;
+  color: v.$text-muted;
+
+  a {
+    font-weight: 600;
+  }
+}
+
+@keyframes auth-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
