@@ -26,6 +26,28 @@ En el repositorio: **Settings → Secrets and variables → Actions → New repo
 | `GMAIL_USER` | `taskai.recordatorios@gmail.com` |
 | `GMAIL_APP_PASSWORD` | La contraseña de aplicación de esa cuenta |
 
+## Disparador externo (cron-job.org)
+
+El programador propio de GitHub resultó poco fiable: llegó a ejecutar solo el ~23 % de las veces y
+pasó horas sin ejecutar. Por eso **cron-job.org** (gratis) lanza el flujo cada hora mediante la API
+de GitHub, del mismo modo que el botón "Run workflow". El horario de GitHub se mantiene como
+respaldo; no hay duplicados porque cada aviso se marca al enviarse.
+
+1. **Token de GitHub** (solo para esto): <https://github.com/settings/personal-access-tokens/new>
+   → *Only select repositories*: `taskai` → *Repository permissions* → **Actions: Read and write**.
+   No necesita ningún otro permiso. Tiene fecha de caducidad: renuévalo antes de que venza.
+2. **cron-job.org** → *Create cronjob*:
+   - URL: `https://api.github.com/repos/Sebas640/taskai/actions/workflows/recordatorios.yml/dispatches`
+   - Horario: cada hora, de 8 a 21, zona horaria `America/Bogota`.
+   - *Advanced* → método **POST**, cabeceras:
+     `Accept: application/vnd.github+json`, `Authorization: Bearer <TOKEN>`,
+     `X-GitHub-Api-Version: 2022-11-28`, `Content-Type: application/json`
+   - Cuerpo: `{"ref":"main","inputs":{"programado":"true"}}`
+   - Respuesta correcta de GitHub: **204 No Content**.
+
+`programado=true` hace que esas ejecuciones respeten la franja 8:00–21:59; el botón manual (sin
+marcarlo) la ignora para poder probar a cualquier hora.
+
 ## Probar
 
 - **En GitHub:** pestaña **Actions → Recordatorios por correo → Run workflow**. Marca *"Solo simular"*

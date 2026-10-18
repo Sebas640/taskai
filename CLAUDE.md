@@ -86,8 +86,14 @@ suspends after ~5 min idle, which is why the engine uses `pool_pre_ping=True`.
 `.github/workflows/recordatorios.yml` runs `automation/enviar_recordatorios.py` every hour from 8:00
 to 21:00 Bogotá. The cron is written in UTC (13–23 plus 0–2) at **minute 17**, not :00. At the top
 of the hour, GitHub's peak load made it drop ~70 % of the scheduled runs (about 4 of 14 per day,
-measured Oct 2026), and the ones that did run had a median delay of 30 min. The script also drops
-runs outside 8:00–21:59, because GitHub can delay scheduled runs. It reads Neon **directly** (not via the API) and
+measured Oct 2026), and the ones that did run had a median delay of 30 min. Even at :17 it went
+hours without running, so the **primary trigger is now cron-job.org**. It calls the
+`workflow_dispatch` API every hour with `inputs.programado=true`, authenticated with a fine-grained
+PAT that has only Actions read/write on this repo; the user owns the PAT and the cron-job.org
+account. The GitHub cron is kept as a backup. `programado=true` makes a dispatch respect the
+8:00–21:59 window; a plain manual dispatch passes `--forzar` so it can be tested at any hour. There
+are no duplicates: reminders are stamped per send and `concurrency` serializes runs. The script also
+drops runs outside 8:00–21:59, because GitHub can delay scheduled runs. It reads Neon **directly** (not via the API) and
 emails tasks due tomorrow or today through Gmail SMTP. After **each** send it stamps
 `tasks.reminder_day_before_sent_at` / `reminder_same_day_sent_at`, so each reminder goes out once;
 `update_task_manual` resets both stamps when `due_date` changes. The script runs

@@ -11,10 +11,20 @@ on:
     # El script descarta las que caigan fuera de 8:00-21:59 de Bogotá.
     - cron: "17 13-23 * * *"
     - cron: "17 0-2 * * *"
-  workflow_dispatch:  # botón "Run workflow" para lanzarlo a mano (ignora la ventana horaria)
+  # Lanzamiento por API o con el botón "Run workflow".
+  # - Botón manual: ignora la ventana horaria (para probar a cualquier hora).
+  # - Disparador externo (cron-job.org, cada hora): envía programado=true y SÍ respeta la ventana.
+  #   Existe porque el programador de GitHub (arriba) descartaba la mayoría de ejecuciones; se
+  #   mantiene como respaldo. No hay duplicados: cada aviso se marca al enviarse y "concurrency"
+  #   impide dos ejecuciones a la vez.
+  workflow_dispatch:
     inputs:
       dry_run:
         description: "Solo simular (no envía correos ni marca tareas)"
+        type: boolean
+        default: false
+      programado:
+        description: "Ejecución programada externa (respeta 8:00-21:59). Déjalo sin marcar al probar."
         type: boolean
         default: false
 
@@ -51,9 +61,10 @@ jobs:
           GMAIL_USER: ${{ secrets.GMAIL_USER }}
           GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
           ES_MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
+          PROGRAMADO: ${{ inputs.programado }}
           SIMULAR: ${{ inputs.dry_run }}
         run: |
           ARGS=""
-          if [ "$ES_MANUAL" = "true" ]; then ARGS="--forzar"; fi
+          if [ "$ES_MANUAL" = "true" ] && [ "$PROGRAMADO" != "true" ]; then ARGS="--forzar"; fi
           if [ "$SIMULAR" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           python automation/enviar_recordatorios.py $ARGS
