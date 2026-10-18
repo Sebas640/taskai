@@ -39,8 +39,9 @@ En el repositorio: **Settings → Secrets and variables → Actions → New repo
 
 ## A tener en cuenta
 
-- GitHub puede **retrasar** las ejecuciones programadas (a veces 30 min o más). El script descarta
-  las que caigan fuera de 8:00–21:59 de Bogotá.
+- GitHub puede **retrasar o descartar** las ejecuciones programadas. Por eso el horario está a
+  **y 17** y no en punto: a las :00, que es el pico de carga de GitHub, solo se ejecutaban ~4 de las
+  14 diarias. El script descarta las que caigan fuera de 8:00–21:59 de Bogotá.
 - En repositorios **públicos**, GitHub desactiva las tareas programadas tras **60 días sin commits**;
   si deja de enviar, revisa la pestaña Actions y reactívalo.
 - Neon trabaja en UTC: el script fija `America/Bogota` al conectarse. Sin eso, desde las 19:00 de

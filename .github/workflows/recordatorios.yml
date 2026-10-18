@@ -5,11 +5,12 @@ name: Recordatorios por correo
 
 on:
   schedule:
-    # Cada hora en punto de 8:00 a 21:00 de Bogotá (UTC-5) = de 13:00 a 02:00 UTC.
-    # GitHub puede retrasar las ejecuciones programadas (a veces 30 min o más); el script
-    # descarta las que caigan fuera de 8:00-21:59 de Bogotá.
-    - cron: "0 13-23 * * *"
-    - cron: "0 0-2 * * *"
+    # Cada hora, a y 17, de 8:17 a 21:17 de Bogotá (UTC-5) = de 13:17 a 02:17 UTC.
+    # Se evita la hora en punto: es el momento de más carga en GitHub, que entonces retrasa y
+    # DESCARTA ejecuciones programadas. A :00 solo se ejecutaban ~4 de 14 al día (oct. 2026).
+    # El script descarta las que caigan fuera de 8:00-21:59 de Bogotá.
+    - cron: "17 13-23 * * *"
+    - cron: "17 0-2 * * *"
   workflow_dispatch:  # botón "Run workflow" para lanzarlo a mano (ignora la ventana horaria)
     inputs:
       dry_run:

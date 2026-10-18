@@ -84,8 +84,10 @@ points there, and the old local database is kept as `LOCAL_DATABASE_URL`. Neon r
 suspends after ~5 min idle, which is why the engine uses `pool_pre_ping=True`.
 
 `.github/workflows/recordatorios.yml` runs `automation/enviar_recordatorios.py` every hour from 8:00
-to 21:00 Bogotá. The cron is written in UTC (13–23 plus 0–2), and the script also drops runs outside
-8:00–21:59, because GitHub can delay scheduled runs. It reads Neon **directly** (not via the API) and
+to 21:00 Bogotá. The cron is written in UTC (13–23 plus 0–2) at **minute 17**, not :00. At the top
+of the hour, GitHub's peak load made it drop ~70 % of the scheduled runs (about 4 of 14 per day,
+measured Oct 2026), and the ones that did run had a median delay of 30 min. The script also drops
+runs outside 8:00–21:59, because GitHub can delay scheduled runs. It reads Neon **directly** (not via the API) and
 emails tasks due tomorrow or today through Gmail SMTP. After **each** send it stamps
 `tasks.reminder_day_before_sent_at` / `reminder_same_day_sent_at`, so each reminder goes out once;
 `update_task_manual` resets both stamps when `due_date` changes. The script runs
